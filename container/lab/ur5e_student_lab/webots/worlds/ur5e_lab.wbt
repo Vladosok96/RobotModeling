@@ -1,0 +1,65 @@
+#VRML_SIM R2023b utf8
+EXTERNPROTO "../protos/TrainingUR5e.proto"
+WorldInfo { title "UR5e — ROS 2 student laboratory" coordinateSystem "ENU" basicTimeStep 16 contactProperties [ ContactProperties { coulombFriction [ 1 ] bounce 0 } ] }
+Viewpoint { position 2.8 -3.64 2.845 orientation -0.2202786805079141 0.11335935094063844 0.9688276216479428 2.21657708 fieldOfView .75 }
+Background { skyColor [ .82 .88 .94 ] }
+DirectionalLight { direction -.3 .4 -1 intensity 1 ambientIntensity .6 }
+DEF FLOOR Solid { translation 0 0 -0.03 name "FLOOR"
+ children [ Shape { appearance PBRAppearance { baseColor .23 .27 .30 roughness .7 metalness 0 } geometry Box { size 3.4 3 0.06 } } ]
+ boundingObject Box { size 3.4 3 0.06 }   }
+DEF PEDESTAL Solid { translation 0 0 0.35 name "PEDESTAL"
+ children [ Shape { appearance PBRAppearance { baseColor .12 .27 .42 roughness .7 metalness 0 } geometry Box { size 0.24 0.24 0.7 } } ]
+ boundingObject Box { size 0.24 0.24 0.7 }   }
+DEF BENCH Solid { translation 0.51 -0.15 0.695 name "BENCH"
+ children [ Shape { appearance PBRAppearance { baseColor .60 .64 .67 roughness .7 metalness 0 } geometry Box { size 0.7 0.7 0.09 } } ]
+ boundingObject Box { size 0.7 0.7 0.09 }   }
+DEF LEG0 Solid { translation 0.2 -0.43 0.33 name "LEG0"
+ children [ Shape { appearance PBRAppearance { baseColor .2 .24 .28 roughness .7 metalness 0 } geometry Box { size 0.045 0.045 0.66 } } ]
+ boundingObject Box { size 0.045 0.045 0.66 }   }
+DEF LEG1 Solid { translation 0.8 -0.43 0.33 name "LEG1"
+ children [ Shape { appearance PBRAppearance { baseColor .2 .24 .28 roughness .7 metalness 0 } geometry Box { size 0.045 0.045 0.66 } } ]
+ boundingObject Box { size 0.045 0.045 0.66 }   }
+DEF LEG2 Solid { translation 0.2 0.43 0.33 name "LEG2"
+ children [ Shape { appearance PBRAppearance { baseColor .2 .24 .28 roughness .7 metalness 0 } geometry Box { size 0.045 0.045 0.66 } } ]
+ boundingObject Box { size 0.045 0.045 0.66 }   }
+DEF LEG3 Solid { translation 0.8 0.43 0.33 name "LEG3"
+ children [ Shape { appearance PBRAppearance { baseColor .2 .24 .28 roughness .7 metalness 0 } geometry Box { size 0.045 0.045 0.66 } } ]
+ boundingObject Box { size 0.045 0.045 0.66 }   }
+Pose { translation 0.15 0 0.706 children [ Shape { appearance PBRAppearance { baseColor 1 .15 .1 } geometry Box { size 0.3 0.009 0.009 } } ] }
+Pose { translation 0 0.15 0.706 children [ Shape { appearance PBRAppearance { baseColor .1 .8 .2 } geometry Box { size 0.009 0.3 0.009 } } ] }
+Pose { translation 0 0 0.86 children [ Shape { appearance PBRAppearance { baseColor .1 .35 1 } geometry Box { size 0.009 0.009 0.3 } } ] }
+DEF ARM TrainingUR5e { translation 0 0 .7 rotation 0 0 1 0 staticBase TRUE name "UR5e" controller "<extern>" supervisor TRUE selfCollision TRUE toolSlot [
+DEF TCP Pose { translation 0 .12 0 }
+Solid { translation 0 .05 0 rotation 1 0 0 -1.57079632679 name "tool_adapter" children [ Shape { appearance PBRAppearance { baseColor .25 .28 .3 } geometry Cylinder { radius .015 height .1 } } ] boundingObject Cylinder { radius .015 height .1 } physics Physics { density -1 mass .08 } }
+VacuumGripper { translation 0 .11 0 rotation 0 0 1 1.57079632679 name "vacuum" contactPoints 1 tensileStrength 50 shearStrength 35
+children [ Shape { appearance PBRAppearance { baseColor .09 .1 .11 roughness .9 } geometry Box { size .02 .04 .04 } } ]
+boundingObject Box { size .02 .04 .04 } physics Physics { density -1 mass .06 } }
+DEF CAMERA Camera { translation 0 .02 -.06 rotation 0 0 1 1.57079632679 name "camera" width 320 height 240 fieldOfView .8 near .005
+children [ Shape { appearance PBRAppearance { baseColor .12 .13 .15 } geometry Box { size .04 .035 .035 } } ] }
+] }
+Shape { appearance PBRAppearance { baseColor .14 .19 .23 roughness .55 } geometry Mesh { url [ "../assets/frame.obj" ] } }
+Shape { appearance PBRAppearance { baseColor .98 .65 .06 roughness .55 } geometry Mesh { url [ "../assets/guard.obj" ] } }
+Shape { appearance PBRAppearance { baseColor .17 .36 .54 roughness .55 } geometry Mesh { url [ "../assets/cabinet.obj" ] } }
+Solid { name "cabinet_collision" translation -1.03 -.7 .5 boundingObject Box { size .28 .4 .9 } }
+Solid { name "fence_collision" translation 0 .95 .75 boundingObject Box { size 2.4 .035 1.3 } }
+DEF CONVEYOR_BASE Solid { translation 0.42 0.35 0.67 name "CONVEYOR_BASE"
+ children [ Shape { appearance PBRAppearance { baseColor .3 .35 .4 roughness .7 metalness 0 } geometry Box { size 0.66 0.26 0.05 } } ]
+ boundingObject Box { size 0.66 0.26 0.05 }   }
+DEF BELT Robot { translation .42 .35 .72 controller "<none>" children [
+Track { children [ Shape { appearance PBRAppearance { baseColor .08 .12 .14 roughness .9 } geometry DEF BAND Box { size .64 .22 .04 } } ] boundingObject USE BAND physics Physics { density -1 mass 2 }
+device [ LinearMotor { name "belt_motor" maxVelocity .2 acceleration .3 } ] textureAnimation 0 0 } ] }
+DEF PART0 Solid { translation 0.28 0.35 0.76 name "PART0"
+ children [ Shape { appearance PBRAppearance { baseColor .9 .07 .04 roughness .7 metalness 0 } geometry Box { size 0.04 0.04 0.04 } } ]
+ boundingObject Box { size 0.04 0.04 0.04 } physics Physics { density -1 mass .1 } recognitionColors [ .9 .07 .04 ] }
+DEF PART1 Solid { translation 0.4 0.35 0.76 name "PART1"
+ children [ Shape { appearance PBRAppearance { baseColor .06 .22 .9 roughness .7 metalness 0 } geometry Box { size 0.04 0.04 0.04 } } ]
+ boundingObject Box { size 0.04 0.04 0.04 } physics Physics { density -1 mass .1 } recognitionColors [ .06 .22 .9 ] }
+DEF PART2 Solid { translation 0.52 0.35 0.76 name "PART2"
+ children [ Shape { appearance PBRAppearance { baseColor .9 .07 .04 roughness .7 metalness 0 } geometry Box { size 0.04 0.04 0.04 } } ]
+ boundingObject Box { size 0.04 0.04 0.04 } physics Physics { density -1 mass .1 } recognitionColors [ .9 .07 .04 ] }
+DEF PALLET Solid { translation 0.43 -0.28 0.75 name "PALLET"
+ children [ Shape { appearance PBRAppearance { baseColor .66 .43 .21 roughness .7 metalness 0 } geometry Box { size 0.38 0.3 0.02 } } ]
+ boundingObject Box { size 0.38 0.3 0.02 }   }
+Pose { translation 0.3 -.28 .761 children [ Shape { appearance PBRAppearance { baseColor .82 .76 .52 } geometry Box { size .046 .046 .001 } } ] }
+Pose { translation 0.42 -.28 .761 children [ Shape { appearance PBRAppearance { baseColor .82 .76 .52 } geometry Box { size .046 .046 .001 } } ] }
+Pose { translation 0.54 -.28 .761 children [ Shape { appearance PBRAppearance { baseColor .82 .76 .52 } geometry Box { size .046 .046 .001 } } ] }

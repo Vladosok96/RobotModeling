@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!-- Driver configuration only; geometry and kinematics are defined by TrainingUR5e.proto. -->
+<robot name="UR5e">
+  <webots>
+    <plugin type="ur5e_student_lab.driver.UR5eDriver" />
+  </webots>
+</robot>

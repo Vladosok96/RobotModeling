@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>ur5e_student_lab</name>
+  <version>0.1.0</version>
+  <description>Standalone UR5e Webots scene and ROS 2 Humble joint control laboratory.</description>
+  <maintainer email="lab@example.com">Student robotics laboratory</maintainer>
+  <license>Apache-2.0</license>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>trajectory_msgs</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
+  <exec_depend>webots_ros2_driver</exec_depend>
+  <test_depend>python3-pytest</test_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>
